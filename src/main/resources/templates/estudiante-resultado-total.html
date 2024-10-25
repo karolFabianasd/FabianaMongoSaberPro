@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado Total</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="icon" href="../img/iconoweb.png" type="image/x-icon"> <!-- Icono favicon -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://cdn.pixabay.com/photo/2019/09/13/16/12/dog-4477514_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: rgb(1, 180, 108);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: rgb(0, 128, 128);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 5px solid rgb(0, 200, 0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        .navbar-title h1 {
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+        }
+
+        .centered-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .result-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .result-card:hover {
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+        }
+
+        .top {
+            background-color: #2ecc71;
+            padding: 20px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .bottom {
+            background-color: #eafaf1;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .info {
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 150px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .level {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .approval {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .approval.aprobado {
+            background-color: #2ecc71; /* Verde para aprobado */
+            color: white;
+        }
+
+        .approval.reprobado {
+            background-color: #e74c3c; /* Rojo para reprobado */
+            color: white;
+        }
+
+        .approval.anulado {
+            background-color: #95a5a6; /* Gris para anulado */
+            color: #141515;
+        }
+
+        .btn-volver {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .btn-volver:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: rgb(0, 128, 128);
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="navbar-title">
+            <h1>RESULTADO TOTAL</h1>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="btn my-2 my-sm-0 logout-btn" th:href="@{/}">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid flex-grow-1">
+        <div class="centered-container">
+            <div class="result-card">
+                <div class="top">
+                    <h2>TOTAL</h2>
+                </div>
+                <div class="bottom">
+                    <div class="info nivel-color-1">
+                        <h3 th:text="${totalLevel}" class="level"></h3>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="info">
+                        <h3>Puntaje</h3>
+                        <p th:text="${total == -1 ? 'Anulado' : total}"></p>
+                    </div>
+                </div>
+                <div class="approval" th:class="${totalLevel == 'Anulado' ? 'anulado' : (totalLevel == 'Nivel 1' || totalLevel == 'Nivel 0' ? 'reprobado' : 'aprobado')}">
+                    <span th:if="${totalLevel == 'Anulado'}">ANULADO</span>
+                    <span th:if="${totalLevel == 'Nivel 1' || totalLevel == 'Nivel 0'}">REPROBÓ EN LAS UTS</span>
+                    <span th:if="${totalLevel == 'Nivel 2' || totalLevel == 'Nivel 3' || totalLevel == 'Nivel 4'}">APROBÓ EN LAS UTS</span>
+                </div>
+                <button class="btn-volver" onclick="window.history.back()">Volver</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        var niveles = document.querySelectorAll(".level");
+        niveles.forEach(function (nivel) {
+            var textoNivel = nivel.textContent.trim();
+            var infoDiv = nivel.parentElement.parentElement;
+
+            if (textoNivel === "-1" || textoNivel === "Anulado") {
+                textoNivel = "Anulado";
+                nivel.textContent = textoNivel;
+            }
+
+            switch (textoNivel) {
+                case "Anulado":
+                    infoDiv.querySelector(".info").classList.add("color-anulado");
+                    break;
+                case "Nivel 1":
+                    infoDiv.querySelector(".info").classList.add("nivel-color-1");
+                    break;
+                case "Nivel 2":
+                    infoDiv.querySelector(".info").classList.add("nivel-color-2");
+                    break;
+                case "Nivel 3":
+                    infoDiv.querySelector(".info").classList.add("nivel-color-3");
+                    break;
+                case "Nivel 4":
+                    infoDiv.querySelector(".info").classList.add("nivel-color-4");
+                    break;
+                default:
+                    break;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
+
