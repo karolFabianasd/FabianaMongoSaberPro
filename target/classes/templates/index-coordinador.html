@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Lista Asociación</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('https://cdn.pixabay.com/photo/2016/11/18/12/22/abstract-1846368_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: rgb(1, 180, 108);
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 1;
+        }
+
+        .navbar {
+            background-color: rgb(0, 128, 128);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 5px solid rgb(0, 200, 0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        .navbar-title h1 {
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+        }
+
+        .container {
+            z-index: 2;
+            max-width: 1100px;
+            margin-top: 2%;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 230, 118, 0.8);
+        }
+
+        .title {
+            text-align: center;
+            margin: 20px 0;
+            color: rgb(0, 128, 128);
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .btn-large {
+            background-color: #00bfa5;
+            color: #2b4b3d;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 4px;
+            border: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-large:hover {
+            background-color: rgb(0, 255, 64);
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.7);
+        }
+
+        .footer {
+            background-color: rgba(52, 58, 64, 0.05);
+            color: #2b4b3d;
+            text-align: center;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .spacing {
+            margin-top: 20px; /* Espacio entre los divs */
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            background-color: white;
+            color: rgb(0, 128, 128);
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: rgb(230, 230, 230);
+            color: rgb(0, 100, 100);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="navbar-title">
+            <h1>PRUEBAS SABER PRO</h1>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="btn my-2 my-sm-0" th:href="@{/}">
+                        <button class="logout-btn">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="title">
+            <h1>¡Bienvenid@, <span th:text="${usuario}"></span>! <i class="bi bi-person-video"></i></h1>
+            <h2>MENÚ</h2>
+            <h3>Selecciona la opción que necesites</h3>
+        </div>
+
+        <div class="spacing"></div> <!-- Espacio adicional -->
+
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a th:href="@{/coordinador/estudiante/crear}" title="Agregar" class="btn btn-large">
+                            <i class="bi bi-person-add" style="font-size: 40px;"></i>
+                            <p>Agregar Estudiante</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a th:href="@{/coordinador/lista}" title="Informes" class="btn btn-large">
+                            <i class="bi bi-file-earmark-text-fill" style="font-size: 40px;"></i>
+                            <p>Informes</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a th:href="@{/estudiante/ranking}" title="Ranking" class="btn btn-large">
+                            <i class="bi bi-star-fill" style="font-size: 40px;"></i>
+                            <p>Ranking</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+

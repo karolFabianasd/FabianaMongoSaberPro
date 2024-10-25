@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado Único</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="../img/iconoweb.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #1d1f21;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #00796b;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 5px solid #00e676;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 0 30px rgba(0, 230, 118, 0.7);
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 0 30px rgba(0, 230, 118, 0.7);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .btn-regresar {
+            background-color: #00bfa5;
+            color: #fff;
+            padding: 7px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-regresar:hover {
+            background-color: #1de9b6;
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.8);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: rgb(255, 255, 255);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            color: #00796b;
+            font-weight: bold;
+        }
+
+        .top {
+            background-color: #00796b;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .bottom {
+            background-color: #00e676;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .divider {
+            width: 1px;
+            height: 30px;
+            background-color: #ffffff;
+            align-items: center;
+        }
+
+        .info {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 5px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            box-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
+        }
+
+        .level {
+            font-weight: bold;
+            color: #00796b;
+        }
+
+        .centered-container {
+            margin: 0 auto;
+        }
+
+        .row {
+            margin: 10px 0;
+        }
+
+        .navbar-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        footer {
+            background-color: #00796b;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+		.btn-back {
+				          background-color: #00bfa5;
+				          color: #fff;
+				          padding: 12px 20px;
+				          border: none;
+				          border-radius: 5px;
+				          cursor: pointer;
+				          transition: background-color 0.3s ease, box-shadow 0.3s ease;
+				          width: 100%;
+				          margin-top: 20px;
+				      }
+	   .navbar{
+		background-color: rgb(0, 128, 128);
+	   }
+
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{/estudiante/index}">
+        </a>
+        <div class="navbar-title">
+            <h1>RESULTADO ÚNICO</h1>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger my-2 my-sm-0" type="submit" th:href="@{/}">Logout</a>
+                </li>
+            </ul>
+        </div>
+		</nav>
+			<div class="container-fluid">
+
+				<br>
+				<div class="centered-container">
+					<div class="row">
+						<div class="col-md-5">
+							<!-- Primera tabla -->
+							<div class="container">
+								<!-- Contenido de la primera tabla -->
+								<div class="top">
+									<h2 class="title-center">INGLES</h2>
+								</div>
+								<div class="bottom">
+									<div class="info nivel-color-1"> <!-- Color dependiendo del nivel -->
+										<h3 th:text="${inglesLevel == -1 ? 'Anulado' : inglesLevel}" class="level"></h3>
+
+									</div>
+									<div class="divider"></div>
+									<div class="info">
+										<h3>Puntaje</h3>
+										<p th:text="${ingles == -1 ? 'Anulado' : ingles}"></p>
+									</div>
+									<div class="divider"></div>
+									<div class="info">
+										<h3>Nivel De Ingles</h3>
+										<p th:text="${levelIngles == -1 ? 'Anulado' : levelIngles}"></p>
+									</div>
+								</div>
+							</div>
+							<br>
+						</div>
+						<div class="col-md-5">
+							<!-- Segunda tabla -->
+							<div class="container">
+								<!-- Contenido de la segunda tabla -->
+								<div class="top">
+									<h2 class="title-center">COMUNICACION ESCRITA</h2>
+								</div>
+								<div class="bottom">
+									<div class="info nivel-color-1"> <!-- Color dependiendo del nivel -->
+										<h3 th:text="${comunicacionLevel == -1 ? 'Anulado' : comunicacionLevel}" class="level"></h3>
+									</div>
+									<div class="divider"></div>
+									<div class="info">
+										<h3>Puntaje</h3>
+										<p th:text="${comunicacion == -1 ? 'Anulado' : comunicacion}"></p>
+									</div>
+								</div>
+							</div>
+							<br>
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-5">
+							<!-- Tercera tabla -->
+							<div class="container">
+								<!-- Contenido de la tercera tabla -->
+								<div class="top">
+									<h2 class="title-center">RAZONAMIENTO CUANTITATIVO</h2>
+								</div>
+								<div class="bottom">
+									<div class="info nivel-color-1"> <!-- Color dependiendo del nivel -->
+										<h3 th:text="${razonamientoLevel == -1 ? 'Anulado' : razonamientoLevel}" class="level"></h3>
+									</div>
+									<div class="divider"></div>
+									<div class="info">
+										<h3>Puntaje</h3>
+										<p th:text="${razonamiento == -1 ? 'Anulado' : razonamiento}"></p>
+									</div>
+								</div>
+							</div>
+							<br>
+						</div>
+						<div class="col-md-5">
+							<!-- Cuarta tabla -->
+							<div class="container">
+								<!-- Contenido de la cuarta tabla -->
+								<div class="top">
+									<h2 class="title-center">LECTURA CRITICA</h2>
+								</div>
+								<div class="bottom">
+									<div class="info nivel-color-1"> <!-- Color dependiendo del nivel -->
+										<h3 th:text="${lecturaLevel == -1 ? 'Anulado' : lecturaLevel}" class="level"></h3>
+									</div>
+									<div class="divider"></div>
+									<div class="info">
+										<h3>Puntaje</h3>
+										<p th:text="${lectura == -1 ? 'Anulado' : lectura}"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<br>
+					</div>
+
+					<div class="row">
+						<div class="col-md-5">
+							<!-- quinta tabla -->
+							<div class="container">
+								<!-- Contenido de la quinta tabla -->
+								<div class="top">
+									<h2 class="title-center">COMPETENCIAS CIUDADANAS</h2>
+								</div>
+								<div class="bottom">
+									<div class="info nivel-color-1"> <!-- Color dependiendo del nivel -->
+										<h3 th:text="${competenciasLevel == -1 ? 'Anulado' : competenciasLevel}" class="level"></h3>
+									</div>
+									<div class="divider"></div>
+									<div class="info">
+										<h3>Puntaje</h3>
+										<p th:text="${competencias == -1 ? 'Anulado' : competencias}"></p>
+									</div>
+								</div>
+							</div>
+							<br>
+						</div>
+						<div class="col-md-5">
+							<!-- sexta tabla -->
+							<div class="container">
+								<!-- Contenido de la sexta tabla -->
+								<div class="top">
+									<h2 class="title-center">FORMULACIÓN DE PROYECTOS DE INGENIERIA</h2>
+								</div>
+								<div class="bottom">
+									<div class="info nivel-color-1"> <!-- Color dependiendo del nivel -->
+										<h3 th:text="${formulacionLevel == -1 ? 'Anulado' : formulacionLevel}" class="level"></h3>
+									</div>
+									<div class="divider"></div>
+									<div class="info">
+										<h3>Puntaje</h3>
+										<p th:text="${formulacion == -1 ? 'Anulado' : formulacion}"></p>
+									</div>
+								</div>
+							</div>
+							<br>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-5">
+							<!-- septima tabla -->
+							<div class="container">
+								<!-- Contenido de la septima tabla -->
+								<div class="top">
+									<h2 class="title-center">PENSAMIENTO CIENTÍFICO - MATEMÁTICAS Y ESTADÍSTICA</h2>
+								</div>
+								<div class="bottom">
+									<div class="info nivel-color-1"> <!-- Color dependiendo del nivel -->
+										<h3 th:text="${pensamientoLevel == -1 ? 'Anulado' : pensamientoLevel}" class="level"></h3>
+									</div>
+									<div class="divider"></div>
+									<div class="info">
+										<h3>Puntaje</h3>
+										<p th:text="${pensamiento == -1 ? 'Anulado' : pensamiento}"></p>
+									</div>
+								</div>
+							</div>
+							<br>
+						</div>
+						<div class="col-md-5">
+							<!-- octaba tabla -->
+							<div class="container">
+								<!-- Contenido de la octaba tabla -->
+								<div class="top">
+									<h2 class="title-center">DISEÑO DE SOFTWARE</h2>
+								</div>
+								<div class="bottom">
+									<div class="info nivel-color-1"> <!-- Color dependiendo del nivel -->
+										<h3 th:text="${DisenoLevel == -1 ? 'Anulado' : DisenoLevel}" class="level"></h3>
+									</div>
+									<div class="divider"></div>
+									<div class="info">
+										<h3>Puntaje</h3>
+										<p th:text="${Diseno == -1 ? 'Anulado' : Diseno}"></p>
+									</div>
+							</div>
+							<br>
+							</div>
+							   <button class="btn-back" onclick="window.history.back()">Volver</button>
+														    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        var niveles = document.querySelectorAll(".level");
+        niveles.forEach(function (nivel) {
+            var textoNivel = nivel.textContent.trim();
+            var infoDiv = nivel.parentElement.parentElement;
+            switch (textoNivel) {
+                case "Nivel 1":
+                    infoDiv.querySelector(".info").style.backgroundColor = "#d4edda";
+                    break;
+                case "Nivel 2":
+                    infoDiv.querySelector(".info").style.backgroundColor = "#c3e6cb";
+                    break;
+                case "Nivel 3":
+                    infoDiv.querySelector(".info").style.backgroundColor = "#a9dca8";
+                    break;
+                case "Nivel 4":
+                    infoDiv.querySelector(".info").style.backgroundColor = "#88c998";
+                    break;
+                default:
+                    break;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
